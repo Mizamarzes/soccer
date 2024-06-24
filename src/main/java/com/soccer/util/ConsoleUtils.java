@@ -31,7 +31,7 @@ public class ConsoleUtils {
                     System.out.println("Opción no válida. Por favor, elija una opción entre " + min + " y " + max + ".");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Entrada no válida. Por favor, ingrese un número entre " + min + " y" + max + ".");
+                System.out.println("Entrada no válida. Por favor, ingrese un número entre " + min + " y " + max + ".");
                 sc.nextLine(); 
             }
         }
@@ -53,5 +53,22 @@ public class ConsoleUtils {
         return entrada; 
     }
     
+    public static int verificarIntSinRango(){
+        Scanner sc = new Scanner(System.in);
+        int opcion = 0;
+        boolean validInput = false;
+
+        while (!validInput) {
+            try {
+                opcion = sc.nextInt();
+                validInput = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
+                sc.next();  
+            }
+        }
+
+        return opcion;
+    }
 }
 
