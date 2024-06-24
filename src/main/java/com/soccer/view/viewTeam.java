@@ -37,7 +37,7 @@ public class viewTeam {
 
             switch (choice) {
                 case 1:
-                    crearEquipo(sc, equipo, jugadores, entrenadores, masajistas);
+                    crearEquipo(equipo, jugadores, entrenadores, masajistas);
                     break;
                 case 2:
                     actualizarEquipo(sc);
@@ -61,87 +61,81 @@ public class viewTeam {
         }
     }
 
-    private void crearEquipo(Scanner sc, Team equipo, ArrayList<Player> jugadores, ArrayList<Coach> entrenadores, ArrayList<Doctor> masajistas) {
+    private void crearEquipo(Team equipo, ArrayList<Player> jugadores, ArrayList<Coach> entrenadores, ArrayList<Doctor> masajistas) {
         String codigoEquipo;
 
         ConsoleUtils.clearScreen();
         System.out.println("Ingrese el codigo del equipo :");
-        codigoEquipo = sc.nextLine();
+        codigoEquipo = ConsoleUtils.verificarEntradaString();
 
         ConsoleUtils.clearScreen();
         System.out.println("Ingrese Nombre del equipo :");
-        equipo.setNombre(sc.nextLine());
+        equipo.setNombre(ConsoleUtils.verificarEntradaString());
 
         ConsoleUtils.clearScreen();
         System.out.println("Ingrese la ciudad :");
-        equipo.setCiudad(sc.nextLine());
+        equipo.setCiudad(ConsoleUtils.verificarEntradaString());
 
-        agregarJugadores(sc, jugadores);
+        agregarJugadores(jugadores);
         equipo.setListJugadores(jugadores);
 
-        agregarEntrenadores(sc, entrenadores);
+        agregarEntrenadores(entrenadores);
         equipo.setListEntrenadores(entrenadores);
 
-        agregarMasajistas(sc, masajistas);
+        agregarMasajistas(masajistas);
         equipo.setListMasajistas(masajistas);
 
         controlador.equipos.put(codigoEquipo, equipo);
     }
 
-    private void agregarJugadores(Scanner sc, ArrayList<Player> jugadores) {
+    private void agregarJugadores(ArrayList<Player> jugadores) {
         while (true) {
             ConsoleUtils.clearScreen();
             System.out.println("Ingrese el ID del jugador: ");
-            int idJugador = sc.nextInt();
-            sc.nextLine();
+            int idJugador = ConsoleUtils.verificarIntSinRango();
             Player jugador = new Player();
             jugador.setId(idJugador);
             jugadores.add(jugador);
 
             ConsoleUtils.clearScreen();
             System.out.println("¿Quieres agregar otro jugador? \n 1. Si \n 2. No");
-            int opcion = sc.nextInt();
-            sc.nextLine();
+            int opcion = ConsoleUtils.verificarEntradaInt(1, 2);
             if (opcion == 2) {
                 break;
             }
         }
     }
 
-    private void agregarEntrenadores(Scanner sc, ArrayList<Coach> entrenadores) {
+    private void agregarEntrenadores(ArrayList<Coach> entrenadores) {
         while (true) {
             ConsoleUtils.clearScreen();
             System.out.println("Ingrese el ID del entrenador");
-            int idEntrenador = sc.nextInt();
-            sc.nextLine();
+            int idEntrenador = ConsoleUtils.verificarIntSinRango();
             Coach entrenador = new Coach();
             entrenador.setId(idEntrenador);
             entrenadores.add(entrenador);
-
+            
             ConsoleUtils.clearScreen();
             System.out.println("¿Quieres agregar otro entrenador? \n 1. Si \n 2. No");
-            int opcion = sc.nextInt();
-            sc.nextLine();
+            int opcion = ConsoleUtils.verificarEntradaInt(1, 2);
             if (opcion == 2) {
                 break;
             }
         }
     }
 
-    private void agregarMasajistas(Scanner sc, ArrayList<Doctor> masajistas) {
+    private void agregarMasajistas(ArrayList<Doctor> masajistas) {
         while (true) {
             ConsoleUtils.clearScreen();
             System.out.println("Ingrese el ID del masajista: ");
-            int idMasajista = sc.nextInt();
-            sc.nextLine();
+            int idMasajista = ConsoleUtils.verificarIntSinRango();
             Doctor masajista = new Doctor();
             masajista.setId(idMasajista);
             masajistas.add(masajista);
 
             ConsoleUtils.clearScreen();
             System.out.println("¿Quieres agregar otro masajista? \n 1. Si \n 2. No");
-            int opcion = sc.nextInt();
-            sc.nextLine();
+            int opcion = ConsoleUtils.verificarEntradaInt(1, 2);
             if (opcion == 2) {
                 break;
             }
