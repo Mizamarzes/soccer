@@ -8,7 +8,16 @@ import com.soccer.view.viewDoctor;
 import com.soccer.view.viewPlayer;
 import com.soccer.view.viewTeam;
 
+import com.soccer.util.ConsoleUtils;
+
 public class Main {
+
+    // Metodo para limpiar consola
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -31,6 +40,7 @@ public class Main {
         int opcion = 0;
 
         while (true) {
+            clearScreen();
             System.out.println("Opciones: \n 1. Equipos \n 2. Jugadores \n 3. Masajistas \n 4. Entrenadores");
             try {
                 opcion = sc.nextInt();
@@ -65,3 +75,6 @@ public class Main {
 
     }
 }
+
+
+
