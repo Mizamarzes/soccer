@@ -1,14 +1,19 @@
 package com.soccer.view;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.soccer.Controller;
+import com.soccer.entity.Coach;
+import com.soccer.entity.Doctor;
+import com.soccer.entity.Player;
 import com.soccer.entity.Team;
 
 public class viewTeam {
     public static Controller controlador;
+
     public void start() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         while (true) {
             System.out.println("1. Crear Equipo");
@@ -17,25 +22,142 @@ public class viewTeam {
             System.out.println("4. Eliminar Equipo");
             System.out.println("5. Listar todos Equipos");
             System.out.println("6. Salir");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+
+            int choice = sc.nextInt();
+            sc.nextLine(); 
+
+            Team equipo = new Team();
+
+            ArrayList<Player> jugadores = new ArrayList<>();
+            ArrayList<Coach> entrenadores = new ArrayList<>();
+            ArrayList<Doctor> masajistas = new ArrayList<>();
 
             switch (choice) {
                 case 1:
-                        Team equipo = new Team();
-                        String codigoEquipo = null;
-                        System.out.println("Ingrese el codigo del equipo :");
-                        codigoEquipo = scanner.nextLine();
-                        System.out.println("Ingrese Nombre del equipo :");
-                        equipo.setNombre(scanner.nextLine());
-                        System.out.println("Ingrese la ciudad :");
-                        equipo.setCiudad(scanner.nextLine());
-                        controlador.equipos.put(codigoEquipo, equipo);
+                    
+                    String codigoEquipo = null;
+
+                    System.out.println("Ingrese el codigo del equipo :");
+                    codigoEquipo = sc.nextLine();
+
+                    System.out.println("Ingrese Nombre del equipo :");
+                    equipo.setNombre(sc.nextLine());
+
+                    System.out.println("Ingrese la ciudad :");
+                    equipo.setCiudad(sc.nextLine());
+
+                    do {
+                        System.out.println("Ingrese el ID del jugador: ");
+                        int idJugador = sc.nextInt();
+                        Player jugador = new Player();
+                        jugador.setId(idJugador);
+                        jugadores.add(jugador);
+
+                        System.out.println("¿Quieres agregar otro jugador? \n 1. Si \n 2. No");
+                        int opcion = sc.nextInt();
+                        if (opcion == 2) {
+                            break;
+                        }
+                        sc.nextLine();
+                    } while (true); 
+
+                    equipo.setListJugadores(jugadores);
+                    
+                    do {
+                        System.out.println("Ingrese el ID del instructor");
+                        int idEntrenador = sc.nextInt();
+                        Coach entrenador = new Coach();
+                        entrenador.setId(idEntrenador);
+                        entrenadores.add(entrenador);
+
+                        System.out.println("¿Quieres agregar otro instructor? \n 1. \n 2.");
+                        int opcion = sc.nextInt();
+                        if (opcion == 2) {
+                            break;
+                        }
+                        sc.nextLine();
+                    }while (true);
+
+                    equipo.setListEntrenadores(entrenadores);
+
+                    do {
+                        System.out.println("Ingrese el ID del masajista: ");
+                        int idMasajita = sc.nextInt();
+                        Doctor masajista = new Doctor();
+                        masajista.setId(idMasajita);
+                        masajistas.add(masajista);
+
+                        System.out.println("¿Quieres agregar otro masajista? \n 1. \n 2.");
+                        int opcion = sc.nextInt();
+                        if (opcion == 2) {
+                            break;
+                        }
+                        sc.nextLine();
+                    } while (true);
+
+                    equipo.setListMasajistas(masajistas);
+
+                    controlador.equipos.put(codigoEquipo, equipo);
                     break;
 
                 case 2:
-                        
-                    break;
+                    System.out.println("Ingrese el codigo del equipo a actualizar: ");
+                    codigoEquipo = sc.nextLine();
+
+                    if (controlador.equipos.containsKey(codigoEquipo)) {
+                        Team equipoAct = controlador.equipos.get(codigoEquipo);
+
+                        System.out.println("""
+                                Que deseas actualizar?
+                                1. Nombre del equipo
+                                2. Ciudad del equipo
+                                3. Agregar(jugador, entrenador, masajista)
+                                4. Eliminar(jugador, entrenador, masajista)
+                                5. Salir
+                                """);
+                        int choice2 = sc.nextInt();
+
+                        switch (choice2) {
+                            case 1:
+                                System.out.println("Ingresa el nuevo nombre del equipo");
+                                String nuevoNombre = sc.nextLine();
+                                equipoAct.setNombre(nuevoNombre);
+                                break;
+                            
+                            case 2:
+                                System.out.println("Ingresa la nueva ciudad del equipo");
+                                String nuevaCiudad = sc.nextLine();
+                                equipoAct.setCiudad(nuevaCiudad);
+                                break;
+                            
+                            case 3:
+                                System.out.println("""
+                                        Que deseas agregar?
+                                        1. Jugador
+                                        2. Entrenador
+                                        3. Masajista
+                                        """);
+                                int choice3 = sc.nextInt();
+                                switch (choice3) {
+                                    case 1:
+                                        System.out.println("MONDA 1");
+                                        break;
+                                    case 2:
+                                        System.out.println("MONDA 2");
+                                        break;
+                                    case 3:
+                                        System.out.println("MONDA 3");
+                                        break;
+                                
+                                    default:
+                                        break;
+                                }
+                            default:
+                                break;
+                        }
+
+                    }
+                    
 
                 case 3:
                     Team eq = new Team();
@@ -52,7 +174,7 @@ public class viewTeam {
                     break;
 
                 case 6:
-                    scanner.close();
+                    sc.close();
                     System.exit(0);
                     break;
 

@@ -36,27 +36,23 @@ public class Team {
         return listJugadores;
     }
 
-    public void setListJugadores(Player player) {
-        this.listJugadores.add(player);
+    public void setListJugadores(List<Player> players) {
+        this.listJugadores.addAll(players);
     }
 
     public List<Coach> getListEntrenadores() {
         return listEntrenadores;
     }
 
-    public void setListEntrenadores(Coach coach) {
-        this.listEntrenadores.add(coach);
+    public void setListEntrenadores(List<Coach> coachs) {
+        this.listEntrenadores.addAll(coachs);
     }
 
     public List<Doctor> getListMasajistas() {
         return listMasajistas;
     }
 
-    public void setListMasajistas(Doctor masajista) {
-        this.listMasajistas.add(masajista);
+    public void setListMasajistas(List<Doctor> masajistas) {
+        this.listMasajistas.addAll(masajistas);
     }
-
-    
-    
-
 }
