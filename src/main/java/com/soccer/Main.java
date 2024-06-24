@@ -1,12 +1,11 @@
 package com.soccer;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.soccer.view.viewCoach;
 import com.soccer.view.viewDoctor;
-import com.soccer.view.viewTeam;
 import com.soccer.view.viewPlayer;
+import com.soccer.view.viewTeam;
 
 import com.soccer.util.ConsoleUtils;
 
@@ -16,7 +15,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         Controller ctrlTeams = new Controller();
-         Controller ctrlPlayers = new Controller();
+        Controller ctrlPlayers = new Controller();
         // Controller ctrlDoctor = new Controller();
         // Controller ctrlCoach = new Controller();
 
@@ -35,49 +34,35 @@ public class Main {
         while (true) {
             ConsoleUtils.clearScreen();
             System.out.println("""
+                Menu de gestion de la liga betplay
 
-            Menu de gestion de la liga betplay
+                Opciones: 
+                1. Equipos  
+                2. Jugadores 
+                3. Masajistas 
+                4. Entrenadores
+                5. Salir
+                """);
 
-            Opciones: 
-            1. Equipos  
-            2. Jugadores 
-            3. Masajistas 
-            4. Entrenadores
-            5. Salir
-            """);
+            opcion = ConsoleUtils.verificarEntradaInt(1, 5);
 
-            try {
-                opcion = sc.nextInt();
-                sc.nextLine(); 
-                if (opcion >= 1 && opcion <= 5) {
-                    break; 
-                } else {
-                    System.out.println("Opción no válida. Por favor, elija una opción entre 1 y 5.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Entrada no válida. Por favor, ingrese un número.");
-                sc.nextLine(); 
+            switch (opcion) {
+                case 1:
+                    vt.start();
+                    break;
+                case 2:
+                    vp.start();
+                    break;
+                case 3:
+                    // vd.start();
+                    break;
+                case 4:
+                    // vc.start();
+                    break;
+                case 5:
+                    sc.close();
+                    System.exit(0);  // Salir del programa
             }
-        }
-
-        switch (opcion) {
-            case 1:
-                vt.start();
-                break;
-            case 2:
-                vp.start();
-                break;
-            case 3:
-                // vd.start();
-                break;
-            case 4:
-                // vc.start();
-                break;
-            case 5:
-                sc.close();
         }
     }
 }
-
-
-
