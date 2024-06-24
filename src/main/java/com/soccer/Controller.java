@@ -9,7 +9,7 @@ import com.soccer.entity.Team;
 
 public class Controller {
     public Hashtable <String, Team> equipos = new Hashtable<>();
-    public Hashtable <String, Player> jugadores = new Hashtable<>();
+    public Hashtable <Integer, Player> jugadores = new Hashtable<>();
     public Hashtable <String, Coach> entrenadores = new Hashtable<>();
     public Hashtable <String, Doctor> masajistas = new Hashtable<>();
 }

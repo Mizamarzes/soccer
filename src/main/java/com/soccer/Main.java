@@ -3,10 +3,10 @@ package com.soccer;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// import com.soccer.view.viewCoach;
-// import com.soccer.view.viewDoctor;
-// import com.soccer.view.viewPlayer;
+import com.soccer.view.viewCoach;
+import com.soccer.view.viewDoctor;
 import com.soccer.view.viewTeam;
+import com.soccer.view.viewPlayer;
 
 import com.soccer.util.ConsoleUtils;
 
@@ -16,17 +16,17 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         Controller ctrlTeams = new Controller();
-        // Controller ctrlPlayers = new Controller();
+         Controller ctrlPlayers = new Controller();
         // Controller ctrlDoctor = new Controller();
         // Controller ctrlCoach = new Controller();
 
         viewTeam.controlador = ctrlTeams;
-        // viewPlayer.controlador = ctrlPlayers;
+        viewPlayer.controlador = ctrlPlayers;
         // viewDoctor.controlador = ctrlCoach;
         // viewCoach.controlador = ctrlCoach;
 
         viewTeam vt = new viewTeam();
-        // viewPlayer vp = new viewPlayer();
+        viewPlayer vp = new viewPlayer();
         // viewDoctor vd = new viewDoctor();
         // viewCoach vc = new viewCoach();
 
@@ -65,7 +65,7 @@ public class Main {
                 vt.start();
                 break;
             case 2:
-                // vp.start();
+                vp.start();
                 break;
             case 3:
                 // vd.start();
