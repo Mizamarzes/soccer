@@ -12,12 +12,6 @@ import com.soccer.util.ConsoleUtils;
 
 public class Main {
 
-    // Metodo para limpiar consola
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -36,19 +30,29 @@ public class Main {
         // viewDoctor vd = new viewDoctor();
         // viewCoach vc = new viewCoach();
 
-         System.out.println("Menu de gestion de la liga betplay");
         int opcion = 0;
 
         while (true) {
-            clearScreen();
-            System.out.println("Opciones: \n 1. Equipos \n 2. Jugadores \n 3. Masajistas \n 4. Entrenadores");
+            ConsoleUtils.clearScreen();
+            System.out.println("""
+
+            Menu de gestion de la liga betplay
+
+            Opciones: 
+            1. Equipos  
+            2. Jugadores 
+            3. Masajistas 
+            4. Entrenadores
+            5. Salir
+            """);
+
             try {
                 opcion = sc.nextInt();
                 sc.nextLine(); 
-                if (opcion >= 1 && opcion <= 4) {
+                if (opcion >= 1 && opcion <= 5) {
                     break; 
                 } else {
-                    System.out.println("Opción no válida. Por favor, elija una opción entre 1 y 4.");
+                    System.out.println("Opción no válida. Por favor, elija una opción entre 1 y 5.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Entrada no válida. Por favor, ingrese un número.");
@@ -69,10 +73,9 @@ public class Main {
             case 4:
                 // vc.start();
                 break;
+            case 5:
+                sc.close();
         }
-
-        sc.close(); 
-
     }
 }
 
