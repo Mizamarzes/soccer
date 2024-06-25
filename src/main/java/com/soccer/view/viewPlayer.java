@@ -139,7 +139,6 @@ public class viewPlayer {
         }
     }
     
-
     private void actualizarNombre(Player jugador) {
         ConsoleUtils.clearScreen();
         System.out.print("Ingresa el nuevo nombre del Jugador: ");
