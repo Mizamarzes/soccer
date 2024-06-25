@@ -60,11 +60,11 @@ public class viewTeam {
     }
 
     private void crearEquipo(Team equipo, ArrayList<Player> jugadores, ArrayList<Coach> entrenadores, ArrayList<Doctor> masajistas) {
-        String codigoEquipo;
+        int codigoEquipo;
 
         ConsoleUtils.clearScreen();
         System.out.println("Ingrese el codigo del equipo :");
-        codigoEquipo = ConsoleUtils.verificarEntradaString();
+        codigoEquipo = ConsoleUtils.verificarIntSinRango();
 
         ConsoleUtils.clearScreen();
         System.out.println("Ingrese Nombre del equipo :");
@@ -143,7 +143,7 @@ public class viewTeam {
     private void actualizarEquipo() {
         ConsoleUtils.clearScreen();
         System.out.println("Ingrese el codigo del equipo a actualizar: ");
-        String codigoEquipo = ConsoleUtils.verificarEntradaString();
+        int codigoEquipo = ConsoleUtils.verificarIntSinRango();
         
         if (controlador.equipos.containsKey(codigoEquipo)) {
             Team equipoAct = controlador.equipos.get(codigoEquipo);
@@ -218,9 +218,9 @@ public class viewTeam {
             ConsoleUtils.clearScreen();
             System.out.println("Ingrese el codigo del equipo a buscar: ");
             System.out.println("Si desea salir ingrese el numero 0");
-            String codeEquipo = ConsoleUtils.verificarEntradaString();
+            int codeEquipo = ConsoleUtils.verificarIntSinRango();
 
-            if (codeEquipo.equals("0")) {
+            if (codeEquipo == 0) {
                 System.out.println("Saliendo...");
                 
                 ConsoleUtils.waitWindow();
@@ -252,7 +252,7 @@ public class viewTeam {
         ConsoleUtils.clearScreen();
         Team eqa = new Team();
         System.out.println("Ingrese el id del equipo a eliminar: ");
-        String idEquipoEliminar = ConsoleUtils.verificarEntradaString();
+        int idEquipoEliminar = ConsoleUtils.verificarIntSinRango();
 
         if(controlador.equipos.contains(idEquipoEliminar)) {
             controlador.equipos.remove(idEquipoEliminar);
@@ -267,7 +267,7 @@ public class viewTeam {
     private void listarEquipos() {
         ConsoleUtils.clearScreen();
         System.out.println("Lista de todos los equipos:");
-        for (String codigo : controlador.equipos.keySet()) {
+        for (int codigo : controlador.equipos.keySet()) {
             Team eq = controlador.equipos.get(codigo);
             System.out.println("");
             System.out.println("Codigo: " + codigo);

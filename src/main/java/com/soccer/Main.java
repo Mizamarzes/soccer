@@ -1,7 +1,5 @@
 package com.soccer;
 
-import java.util.Scanner;
-
 import com.soccer.view.viewCoach;
 import com.soccer.view.viewDoctor;
 import com.soccer.view.viewPlayer;
@@ -12,22 +10,21 @@ import com.soccer.util.ConsoleUtils;
 public class Main {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
+        
         Controller ctrlTeams = new Controller();
         Controller ctrlPlayers = new Controller();
-        // Controller ctrlDoctor = new Controller();
-        // Controller ctrlCoach = new Controller();
+        Controller ctrlDoctor = new Controller();
+        Controller ctrlCoach = new Controller();
 
         viewTeam.controlador = ctrlTeams;
         viewPlayer.controlador = ctrlPlayers;
-        // viewDoctor.controlador = ctrlCoach;
-        // viewCoach.controlador = ctrlCoach;
+        viewDoctor.controlador = ctrlDoctor;
+        viewCoach.controlador = ctrlCoach;
 
         viewTeam vt = new viewTeam();
         viewPlayer vp = new viewPlayer();
-        // viewDoctor vd = new viewDoctor();
-        // viewCoach vc = new viewCoach();
+        viewDoctor vd = new viewDoctor();
+        viewCoach vc = new viewCoach();
 
         int opcion = 0;
 
@@ -39,7 +36,7 @@ public class Main {
                 Opciones: 
                 1. Equipos  
                 2. Jugadores 
-                3. Masajistas 
+                3. Doctores 
                 4. Entrenadores
                 5. Salir
                 """);
@@ -55,14 +52,13 @@ public class Main {
                     vp.start();
                     break;
                 case 3:
-                    // vd.start();
+                    vd.start();
                     break;
                 case 4:
-                    // vc.start();
+                    vc.start();
                     break;
                 case 5:
-                    sc.close();
-                    System.exit(0);  // Salir del programa
+                    return;
             }
         }
     }
