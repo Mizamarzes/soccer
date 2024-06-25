@@ -43,6 +43,7 @@ public class Main {
                 4. Entrenadores
                 5. Salir
                 """);
+                System.out.print("Ingrese una opción: ");
 
             opcion = ConsoleUtils.verificarEntradaInt(1, 5);
 

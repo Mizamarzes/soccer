@@ -1,7 +1,6 @@
 package com.soccer.view;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.soccer.Controller;
 
@@ -16,8 +15,7 @@ public class viewTeam {
     public static Controller controlador;
 
     public void start() {
-        Scanner sc = new Scanner(System.in);
-
+        
         while (true) {
             ConsoleUtils.clearScreen();
             System.out.println("1. Crear Equipo");
@@ -26,6 +24,8 @@ public class viewTeam {
             System.out.println("4. Eliminar Equipo");
             System.out.println("5. Listar todos Equipos");
             System.out.println("6. Salir");
+            System.out.println("");
+            System.out.print("Ingrese una opción: ");
 
             int choice = ConsoleUtils.verificarEntradaInt(1, 6);
             
@@ -40,23 +40,21 @@ public class viewTeam {
                     crearEquipo(equipo, jugadores, entrenadores, masajistas);
                     break;
                 case 2:
-                    actualizarEquipo(sc);
+                    actualizarEquipo();
                     break;
                 case 3:
-                    buscarEquipo(sc);
+                    buscarEquipo();
                     break;
                 case 4:
-                    eliminarEquipo(sc);
+                    eliminarEquipo();
                     break;
                 case 5:
                     listarEquipos();
                     break;
                 case 6:
-                    sc.close();
-                    System.exit(0);
-                    break;
+                    return;
                 default:
-                    System.out.println("Opcion invalida, intentelo de nuevo.");
+                    break;
             }
         }
     }
@@ -142,44 +140,35 @@ public class viewTeam {
         }
     }
 
-    private void actualizarEquipo(Scanner sc) {
+    private void actualizarEquipo() {
         ConsoleUtils.clearScreen();
         System.out.println("Ingrese el codigo del equipo a actualizar: ");
-        String codigoEquipo = sc.nextLine();
-
+        String codigoEquipo = ConsoleUtils.verificarEntradaString();
+        
         if (controlador.equipos.containsKey(codigoEquipo)) {
             Team equipoAct = controlador.equipos.get(codigoEquipo);
             ConsoleUtils.clearScreen();
             System.out.println("""
-                Que deseas actualizar?
-                1. Nombre del equipo
-                2. Ciudad del equipo
-                3. Agregar(jugador, entrenador, masajista)
-                4. Eliminar(jugador, entrenador, masajista)
-                5. Salir
+            Que deseas actualizar?
+            1. Nombre del equipo
+            2. Ciudad del equipo
+            3. Salir
             """);
-            int choice2 = sc.nextInt();
-            sc.nextLine();
-
+            int choice2 = ConsoleUtils.verificarEntradaInt(1, 3);
+            
             switch (choice2) {
                 case 1:
                     ConsoleUtils.clearScreen();
                     System.out.println("Ingresa el nuevo nombre del equipo");
-                    equipoAct.setNombre(sc.nextLine());
+                    equipoAct.setNombre(ConsoleUtils.verificarEntradaString());
                     break;
                 case 2:
                     ConsoleUtils.clearScreen();
                     System.out.println("Ingresa la nueva ciudad del equipo");
-                    equipoAct.setCiudad(sc.nextLine());
+                    equipoAct.setCiudad(ConsoleUtils.verificarEntradaString());
                     break;
                 case 3:
-                    // agregarEntidad(sc, equipoAct);
                     break;
-                case 4:
-                    eliminarEntidad(sc, equipoAct);
-                    break;
-                case 5:
-                    return;
                 default:
                     System.out.println("Opcion invalida, intentelo de nuevo.");
             }
@@ -188,14 +177,48 @@ public class viewTeam {
         }
     }
 
-    private void buscarEquipo(Scanner sc) {
+    // private void agregarEntidad(Team equipoAct) {
+    //     ConsoleUtils.clearScreen();
+    //     System.out.println("""
+    //             Que deseas agregar?
+    //             1. Jugador
+    //             2. Entrenador
+    //             3. Masajista
+    //             4. Salir
+    //             """);
+    //     int choice = ConsoleUtils.verificarEntradaInt(1, 4);
+
+    //     switch (choice) {
+    //         case 1:
+    //             ArrayList<Player> jugadores = equipoAct.getListJugadores();
+    //             agregarJugadores(jugadores);
+    //             equipoAct.setListJugadores(jugadores);
+    //             break;
+    //         case 2:
+    //             ArrayList<Coach> entrenadores = equipoAct.getListEntrenadores();
+    //             agregarEntrenadores(entrenadores);
+    //             equipoAct.setListEntrenadores(entrenadores);
+    //             break;
+    //         case 3:
+    //             ArrayList<Doctor> masajistas = equipoAct.getListMasajistas();
+    //             agregarMasajistas(masajistas);
+    //             equipoAct.setListMasajistas(masajistas);
+    //             break;
+    //         case 4:
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
+
+    private void buscarEquipo() {
         boolean encontrado = false;
 
         while (!encontrado) {
             ConsoleUtils.clearScreen();
             System.out.println("Ingrese el codigo del equipo a buscar: ");
             System.out.println("Si desea salir ingrese el numero 0");
-            String codeEquipo = sc.nextLine();
+            String codeEquipo = ConsoleUtils.verificarEntradaString();
 
             if (codeEquipo.equals("0")) {
                 System.out.println("Saliendo...");
@@ -225,55 +248,33 @@ public class viewTeam {
         }
     }
 
-    private void eliminarEquipo(Scanner sc) {
-        // Implementar lógica para eliminar equipo
-    }
+    private void eliminarEquipo() {
+        ConsoleUtils.clearScreen();
+        Team eqa = new Team();
+        System.out.println("Ingrese el id del equipo a eliminar: ");
+        String idEquipoEliminar = ConsoleUtils.verificarEntradaString();
 
+        if(controlador.equipos.contains(idEquipoEliminar)) {
+            controlador.equipos.remove(idEquipoEliminar);
+            System.out.println("El equipo " + eqa.getNombre() + " ha sido eliminado");
+        } else {
+            System.out.println("El equipo con " + idEquipoEliminar + " no existe");
+        }
+        ConsoleUtils.waitWindow();
+
+    }
+    
     private void listarEquipos() {
         ConsoleUtils.clearScreen();
         System.out.println("Lista de todos los equipos:");
         for (String codigo : controlador.equipos.keySet()) {
             Team eq = controlador.equipos.get(codigo);
-            System.out.println("Codigo: " + codigo + ", Nombre: " + eq.getNombre() + ", Ciudad: " + eq.getCiudad());
+            System.out.println("");
+            System.out.println("Codigo: " + codigo);
+            System.out.println("Nombre: " + eq.getNombre());
+            System.out.println("Ciudad: " + eq.getCiudad());
         }
+        ConsoleUtils.waitWindow();
     }
 
-    // private void agregarEntidad(Scanner sc, Team equipoAct) {
-    //     ConsoleUtils.clearScreen();
-    //     System.out.println("""
-    //             Que deseas agregar?
-    //             1. Jugador
-    //             2. Entrenador
-    //             3. Masajista
-    //             4. Salir
-    //             """);
-    //     int choice = sc.nextInt();
-    //     sc.nextLine();
-
-    //     switch (choice) {
-    //         case 1:
-    //             ArrayList<Player> jugadores = equipoAct.getListJugadores();
-    //             agregarJugadores(sc, jugadores);
-    //             equipoAct.setListJugadores(jugadores);
-    //             break;
-    //         case 2:
-    //             ArrayList<Coach> entrenadores = equipoAct.getListEntrenadores();
-    //             agregarEntrenadores(sc, entrenadores);
-    //             equipoAct.setListEntrenadores(entrenadores);
-    //             break;
-    //         case 3:
-    //             ArrayList<Doctor> masajistas = equipoAct.getListMasajistas();
-    //             agregarMasajistas(sc, masajistas);
-    //             equipoAct.setListMasajistas(masajistas);
-    //             break;
-    //         case 4:
-    //             break;
-    //         default:
-    //             System.out.println("Opcion invalida, intentelo de nuevo.");
-    //     }
-    // }
-
-    private void eliminarEntidad(Scanner sc, Team equipoAct) {
-        // Implementar   
-    }
 }
